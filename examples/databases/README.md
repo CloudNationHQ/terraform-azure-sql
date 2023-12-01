@@ -1,14 +1,15 @@
-This example shows an implementation of this module focused on adding multiple databases to the sql server.
+This example illustrates configuring multiple sql server databases.
 
 ## Usage
 
 ```hcl
 module "sql" {
-  source = "../../"
+  source  = "cloudnationhq/sql/azure"
+  version = "~> 0.1"
 
   naming = local.naming
 
-  sql = {
+  instance = {
     name          = module.naming.sql_server.name_unique
     location      = module.rg.groups.demo.location
     resourcegroup = module.rg.groups.demo.name
@@ -26,12 +27,13 @@ In situations where several databases reference the same elastic pool, the follo
 
 ```hcl
 module "sql" {
-  source = "../../"
+  source  = "cloudnationhq/sql/azure"
+  version = "~> 0.1"
 
   naming = local.naming
 
-  sql = {
-    name          = module.naming.sql_server.name_unique
+  instance = {
+    name          = module.naming.mssql_server.name_unique
     location      = module.rg.groups.demo.location
     resourcegroup = module.rg.groups.demo.name
     password      = module.kv.secrets.sql.value

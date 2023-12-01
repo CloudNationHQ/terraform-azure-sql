@@ -1,6 +1,6 @@
 locals {
   db = flatten([
-    for db_key, db in try(var.sql.databases, {}) : {
+    for db_key, db in try(var.instance.databases, {}) : {
       db_key          = db_key
       name            = try(db.name, join("-", [var.naming.mssql_database, db_key]))
       server_id       = azurerm_mssql_server.sql.id
@@ -17,19 +17,16 @@ locals {
 
 locals {
   ep = flatten([
-    for ep_key, ep in try(var.sql.elasticpools, {}) : {
+    for ep_key, ep in try(var.instance.elasticpools, {}) : {
       ep_key         = ep_key
       name           = try(ep.name, join("-", [var.naming.mssql_elasticpool, ep_key]))
       server_name    = azurerm_mssql_server.sql.name
       license_type   = try(ep.license_type, "LicenseIncluded")
       max_size_gb    = try(ep.max_size_gb, 4)
       zone_redundant = try(ep.zone_redundant, false)
-
-      sku = {
-        name     = try(ep.sku.name, "StandardPool")
-        tier     = try(ep.sku.tier, "Standard")
-        capacity = try(ep.sku.capacity, 200)
-      }
+      sku            = try(ep.sku, "StandardPool")
+      tier           = try(ep.tier, "Standard")
+      capacity       = try(ep.capacity, 200)
 
       per_database_settings = {
         min_capacity = try(ep.per_database_settings.min_capacity, 0)

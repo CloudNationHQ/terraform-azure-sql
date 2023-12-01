@@ -27,6 +27,15 @@ module "kv" {
     name          = module.naming.key_vault.name_unique
     location      = module.rg.groups.demo.location
     resourcegroup = module.rg.groups.demo.name
+
+    secrets = {
+      random_string = {
+        sql = {
+          length  = 24
+          special = true
+        }
+      }
+    }
   }
 }
 
@@ -41,21 +50,17 @@ module "network" {
     location      = module.rg.groups.demo.location
     resourcegroup = module.rg.groups.demo.name
     cidr          = ["10.18.0.0/16"]
-
-    subnets = {
-      int = { cidr = ["10.18.1.0/24"] }
-    }
   }
 }
 
 module "sql" {
-  source  = "cloudnationhq/mssql/azure"
+  source  = "cloudnationhq/sql/azure"
   version = "~> 0.1"
 
   naming = local.naming
 
-  sql = {
-    name          = module.naming.sql_server.name_unique
+  instance = {
+    name          = module.naming.mssql_server.name_unique
     location      = module.rg.groups.demo.location
     resourcegroup = module.rg.groups.demo.name
     password      = module.kv.secrets.sql.value

@@ -1,9 +1,9 @@
-variable "sql" {
-  description = "Contains all sql settings"
+variable "instance" {
+  description = "describes sql server related configuration"
   type        = any
 }
 
 variable "naming" {
-  description = "Used for naming purposes"
+  description = "used for naming purposes"
   type        = map(string)
 }

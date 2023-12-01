@@ -1,8 +1,8 @@
-module github.com/CloudNationHQ/az-cn-module-tf-sql
+module github.com/cloudnationhq/terraform-azure-sql
 
 go 1.20
 
-require github.com/gruntwork-io/terratest v0.46.5
+require github.com/gruntwork-io/terratest v0.46.7
 
 require (
 	cloud.google.com/go v0.110.0 // indirect

@@ -40,12 +40,13 @@ module "kv" {
 }
 
 module "sql" {
-  source = "../../"
+  source  = "cloudnationhq/sql/azure"
+  version = "~> 0.1"
 
   naming = local.naming
 
-  sql = {
-    name          = module.naming.sql_server.name_unique
+  instance = {
+    name          = module.naming.mssql_server.name_unique
     location      = module.rg.groups.demo.location
     resourcegroup = module.rg.groups.demo.name
     password      = module.kv.secrets.sql.value

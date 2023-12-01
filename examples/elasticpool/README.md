@@ -1,23 +1,24 @@
-This example shows an implementation of this module focused on adding multiple elastic pools to the sql server.
+This example showcases setting up multiple elastic pools.
 
 ## Usage
 
 ```hcl
 module "sql" {
-  source = "../../"
+  source  = "cloudnationhq/sql/azure"
+  version = "~> 0.1"
 
   naming = local.naming
 
-  sql = {
-    name          = module.naming.sql_server.name_unique
+  instance = {
+    name          = module.naming.mssql_server.name_unique
     location      = module.rg.groups.demo.location
     resourcegroup = module.rg.groups.demo.name
     password      = module.kv.secrets.sql.value
 
 
     elasticpool = {
-      prod = { max_size_gb = 19.5312500 }
-      dev  = { max_size_gb = 19.5312500 }
+      appsvc = { max_size_gb = 50 }
+      webapp = { max_size_gb = 100 }
     }
   }
 }

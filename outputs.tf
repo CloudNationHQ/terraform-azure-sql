@@ -1,11 +1,14 @@
-output "mssql_server" {
-  value = azurerm_mssql_database.database
+output "server" {
+  description = "contains all sql server details"
+  value       = azurerm_mssql_server.sql
 }
 
-output "mssql_elasticpool" {
-  value = azurerm_mssql_elasticpool.elasticpool
+output "elasticpools" {
+  description = "contains elastic pools"
+  value       = azurerm_mssql_elasticpool.elasticpool
 }
 
-output "mssql_database" {
-  value = azurerm_mssql_database.database
+output "databases" {
+  description = "contains databases"
+  value       = azurerm_mssql_database.database
 }
