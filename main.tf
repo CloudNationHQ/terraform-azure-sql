@@ -7,7 +7,7 @@ resource "azurerm_mssql_server" "sql" {
   location                             = var.instance.location
   version                              = try(var.instance.version, "12.0")
   public_network_access_enabled        = try(var.instance.public_access, false)
-  administrator_login                  = try(var.instance.admin, "adminCloudnation")
+  administrator_login                  = try(var.instance.admin, "adminLogin")
   administrator_login_password         = var.instance.password
   connection_policy                    = try(var.instance.connection_policy, "Default")
   minimum_tls_version                  = try(var.instance.minimum_tls_version, "1.2")
