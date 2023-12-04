@@ -1,5 +1,3 @@
-data "azurerm_subscription" "current" {}
-
 # mysql server
 resource "azurerm_mssql_server" "sql" {
   name                                 = var.instance.name
