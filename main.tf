@@ -104,3 +104,4 @@ resource "azurerm_mssql_database" "database_ep" {
   sku_name        = each.value.sku
   elastic_pool_id = azurerm_mssql_elasticpool.elasticpool[each.value.elasticpool].id
 }
+
