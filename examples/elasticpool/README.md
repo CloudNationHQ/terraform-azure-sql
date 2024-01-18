@@ -5,7 +5,7 @@ This example showcases setting up multiple elastic pools.
 ```hcl
 module "sql" {
   source  = "cloudnationhq/sql/azure"
-  version = "~> 0.1"
+  version = "~> 0.2"
 
   naming = local.naming
 
