@@ -5,7 +5,7 @@ This example illustrates the default sql server setup, in its simplest form.
 ```hcl
 module "sql" {
   source  = "cloudnationhq/sql/azure"
-  version = "~> 0.1"
+  version = "~> 0.2"
 
   instance = {
     name          = module.naming.mssql_server.name_unique
