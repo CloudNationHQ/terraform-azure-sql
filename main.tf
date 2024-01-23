@@ -51,18 +51,22 @@ resource "azurerm_mssql_elasticpool" "elasticpool" {
     for ep in local.ep : ep.ep_key => ep
   }
 
-  name                = each.value.name
-  resource_group_name = var.instance.resourcegroup
-  location            = var.instance.location
-  server_name         = each.value.server_name
-  license_type        = each.value.license_type
-  max_size_gb         = each.value.max_size_gb
-  zone_redundant      = each.value.zone_redundant
+  name                           = each.value.name
+  resource_group_name            = var.instance.resourcegroup
+  location                       = var.instance.location
+  server_name                    = each.value.server_name
+  license_type                   = each.value.license_type
+  max_size_gb                    = each.value.max_size_gb
+  zone_redundant                 = each.value.zone_redundant
+  enclave_type                   = each.value.enclave_type
+  maintenance_configuration_name = each.value.maintenance_configuration_name
+  max_size_bytes                 = each.value.max_size_bytes
 
   sku {
     name     = each.value.sku
     tier     = each.value.tier
     capacity = each.value.capacity
+    family   = each.value.family
   }
 
   per_database_settings {
@@ -77,14 +81,24 @@ resource "azurerm_mssql_database" "database" {
     for db in local.db : db.db_key => db
   }
 
-  name            = each.value.name
-  server_id       = each.value.server_id
-  collation       = each.value.collation
-  max_size_gb     = each.value.max_size_gb
-  read_scale      = each.value.read_scale
-  zone_redundant  = each.value.zone_redundant
-  sku_name        = each.value.sku
-  elastic_pool_id = each.value.elastic_pool_id
+  name                                = each.value.name
+  server_id                           = each.value.server_id
+  collation                           = each.value.collation
+  max_size_gb                         = each.value.max_size_gb
+  read_scale                          = each.value.read_scale
+  zone_redundant                      = each.value.zone_redundant
+  sku_name                            = each.value.sku
+  elastic_pool_id                     = each.value.elastic_pool_id
+  min_capacity                        = each.value.min_capacity
+  create_mode                         = each.value.create_mode
+  license_type                        = each.value.license_type
+  ledger_enabled                      = each.value.ledger_enabled
+  geo_backup_enabled                  = each.value.geo_backup_enabled
+  sample_name                         = each.value.sample_name
+  read_replica_count                  = each.value.read_replica_count
+  storage_account_type                = each.value.storage_account_type
+  transparent_data_encryption_enabled = each.value.transparent_data_encryption_enabled
+  enclave_type                        = each.value.enclave_type
 }
 
 # databases elastic pool
@@ -93,13 +107,23 @@ resource "azurerm_mssql_database" "database_ep" {
     for db in local.db : db.db_key => db if db.elasticpool != null
   }
 
-  name            = each.value.name
-  server_id       = each.value.server_id
-  collation       = each.value.collation
-  max_size_gb     = each.value.max_size_gb
-  read_scale      = each.value.read_scale
-  zone_redundant  = each.value.zone_redundant
-  sku_name        = each.value.sku
-  elastic_pool_id = azurerm_mssql_elasticpool.elasticpool[each.value.elasticpool].id
+  name                                = each.value.name
+  server_id                           = each.value.server_id
+  collation                           = each.value.collation
+  max_size_gb                         = each.value.max_size_gb
+  read_scale                          = each.value.read_scale
+  zone_redundant                      = each.value.zone_redundant
+  sku_name                            = each.value.sku
+  elastic_pool_id                     = azurerm_mssql_elasticpool.elasticpool[each.value.elasticpool].id
+  min_capacity                        = each.value.min_capacity
+  create_mode                         = each.value.create_mode
+  license_type                        = each.value.license_type
+  ledger_enabled                      = each.value.ledger_enabled
+  geo_backup_enabled                  = each.value.geo_backup_enabled
+  sample_name                         = each.value.sample_name
+  read_replica_count                  = each.value.read_replica_count
+  storage_account_type                = each.value.storage_account_type
+  transparent_data_encryption_enabled = each.value.transparent_data_encryption_enabled
+  enclave_type                        = each.value.enclave_type
 }
 
