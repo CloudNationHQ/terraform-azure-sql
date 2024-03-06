@@ -12,19 +12,16 @@ module "sql" {
 }
 ```
 
+The module uses the below locals for configuration:
+
 ```hcl
-module "sql" {
-  source  = "cloudnationhq/sql/azure"
-  version = "~> 0.3"
-
-  naming = local.naming
-
+locals {
   instance = {
-    name          = module.naming.mssql_server.name_unique
-    location      = module.rg.groups.demo.location
-    resourcegroup = module.rg.groups.demo.name
-    password      = module.kv.secrets.sql.value
-    public_access = true
+    name                          = module.naming.mssql_server.name_unique
+    location                      = module.rg.groups.demo.location
+    resourcegroup                 = module.rg.groups.demo.name
+    administrator_login_password  = module.kv.secrets.sql.value
+    public_network_access_enabled = true
 
     databases = {
       user = {
