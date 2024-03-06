@@ -90,8 +90,8 @@ resource "azurerm_mssql_database" "database" {
   max_size_gb                                                = each.value.max_size_gb
   read_scale                                                 = each.value.read_scale
   zone_redundant                                             = each.value.zone_redundant
-  sku_name                                                   = each.value.sku
-  elastic_pool_id                                            = each.value.elastic_pool_id
+  sku_name                                                   = each.value.sku != "ElasticPool" ? each.value.sku : null
+  elastic_pool_id                                            = try(azurerm_mssql_elasticpool.elasticpool[each.value.elasticpool].id, null)
   min_capacity                                               = each.value.min_capacity
   create_mode                                                = each.value.create_mode
   license_type                                               = each.value.license_type
@@ -112,39 +112,3 @@ resource "azurerm_mssql_database" "database" {
   restore_dropped_database_id                                = each.value.restore_dropped_database_id
   tags                                                       = each.value.tags
 }
-
-# databases elastic pool
-resource "azurerm_mssql_database" "database_ep" {
-  for_each = {
-    for db in local.db : db.db_key => db if db.elasticpool != null
-  }
-
-  name                                                       = each.value.name
-  server_id                                                  = each.value.server_id
-  collation                                                  = each.value.collation
-  max_size_gb                                                = each.value.max_size_gb
-  read_scale                                                 = each.value.read_scale
-  zone_redundant                                             = each.value.zone_redundant
-  sku_name                                                   = each.value.sku
-  elastic_pool_id                                            = azurerm_mssql_elasticpool.elasticpool[each.value.elasticpool].id
-  min_capacity                                               = each.value.min_capacity
-  create_mode                                                = each.value.create_mode
-  license_type                                               = each.value.license_type
-  ledger_enabled                                             = each.value.ledger_enabled
-  geo_backup_enabled                                         = each.value.geo_backup_enabled
-  sample_name                                                = each.value.sample_name
-  read_replica_count                                         = each.value.read_replica_count
-  storage_account_type                                       = each.value.storage_account_type
-  transparent_data_encryption_enabled                        = each.value.transparent_data_encryption_enabled
-  enclave_type                                               = each.value.enclave_type
-  transparent_data_encryption_key_vault_key_id               = each.value.transparent_data_encryption_key_vault_key_id
-  transparent_data_encryption_key_automatic_rotation_enabled = each.value.transparent_data_encryption_key_automatic_rotation_enabled
-  maintenance_configuration_name                             = each.value.maintenance_configuration_name
-  recover_database_id                                        = each.value.recover_database_id
-  restore_point_in_time                                      = each.value.restore_point_in_time
-  auto_pause_delay_in_minutes                                = each.value.auto_pause_delay_in_minutes
-  creation_source_database_id                                = each.value.creation_source_database_id
-  restore_dropped_database_id                                = each.value.restore_dropped_database_id
-  tags                                                       = each.value.tags
-}
-
