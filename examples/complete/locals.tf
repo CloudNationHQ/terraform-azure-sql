@@ -40,15 +40,6 @@ locals {
 
     identity = {
       type = "SystemAssigned, UserAssigned"
-      identity_ids = [
-        azurerm_user_assigned_identity.uai.id
-      ]
     }
   }
-}
-
-resource "azurerm_user_assigned_identity" "uai" {
-  name                = "uai-bla"
-  location            = "northeurope"
-  resource_group_name = module.rg.groups.demo.name
 }

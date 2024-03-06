@@ -14,11 +14,14 @@ resource "azurerm_mssql_server" "sql" {
   tags                                         = try(var.instance.tags, var.tags, null)
 
   dynamic "identity" {
-    for_each = [lookup(var.instance, "identity", { type = "SystemAssigned", identity_ids = [] })]
+    for_each = contains(keys(var.instance), "identity") ? [var.instance.identity] : []
 
     content {
-      type         = identity.value.type
-      identity_ids = var.instance.identity.type == "UserAssigned" || var.instance.identity.type == "SystemAssigned, UserAssigned" ? concat([azurerm_user_assigned_identity.identity["identity"].id], lookup(var.instance.identity, "identity_ids", [])) : []
+      type = identity.value.type
+      identity_ids = contains(["UserAssigned", "SystemAssigned, UserAssigned"], identity.value.type) ? concat(
+        try([azurerm_user_assigned_identity.identity["identity"].id], []),
+        try(lookup(identity.value, "identity_ids", []), [])
+      ) : []
     }
   }
 
