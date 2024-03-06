@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.4.1...v0.5.0) (2024-03-06)
+
+
+### Features
+
+* optimized dynamic identity blocks ([#22](https://github.com/CloudNationHQ/terraform-azure-sql/issues/22)) ([647a174](https://github.com/CloudNationHQ/terraform-azure-sql/commit/647a174b2f4d183f137389a64fbde681cc9ac1d3))
+
 ## [0.4.1](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.4.0...v0.4.1) (2024-03-06)
 
 
