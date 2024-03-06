@@ -17,13 +17,21 @@ resource "azurerm_mssql_server" "sql" {
     for_each = [lookup(var.instance, "identity", { type = "SystemAssigned", identity_ids = [] })]
 
     content {
-      type = identity.value.type
-      identity_ids = concat(
-        try([azurerm_user_assigned_identity.identity[var.instance.name].id], []),
-        lookup(identity.value, "identity_ids", [])
-      )
+      type         = identity.value.type
+      identity_ids = var.instance.identity.type == "UserAssigned" || var.instance.identity.type == "SystemAssigned, UserAssigned" ? concat([azurerm_user_assigned_identity.identity["identity"].id], lookup(var.instance.identity, "identity_ids", [])) : []
     }
   }
+
+  #dynamic "identity" {
+  #for_each = [lookup(var.instance, "identity", { type = "SystemAssigned", identity_ids = [] })]
+
+  #content {
+  #type = identity.value.type
+  #identity_ids = var.instance.identity.type == "UserAssigned" || var.instance.identity.type == "SystemAssigned, UserAssigned" ? [
+  #azurerm_user_assigned_identity.identity["identity"].id
+  #] : []
+  #}
+  #}
 
   dynamic "azuread_administrator" {
     for_each = try(var.instance.azuread_administrator, null) != null ? { admin = var.instance.azuread_administrator } : {}
@@ -122,22 +130,10 @@ resource "azurerm_mssql_database" "database" {
 }
 
 resource "azurerm_user_assigned_identity" "identity" {
-  for_each = contains(
-    ["UserAssigned", "SystemAssigned, UserAssigned"], try(var.instance.identity.type, "")
-  ) ? { (var.instance.name) = {} } : {}
+  for_each = contains(["UserAssigned", "SystemAssigned, UserAssigned"], try(var.instance.identity.type, "")) ? { "identity" = var.instance.identity } : {}
 
-
-  name                = try(var.instance.identity.name, "uai-${var.instance.name}")
+  name                = try(each.value.name, "uai-${var.instance.name}")
   resource_group_name = coalesce(lookup(var.instance, "resourcegroup", null), var.resourcegroup)
   location            = coalesce(lookup(var.instance, "location", null), var.location)
-  tags                = try(var.instance.identity.tags, var.tags, null)
+  tags                = try(each.value.tags, var.tags, null)
 }
-
-#resource "azurerm_user_assigned_identity" "identity" {
-  #for_each = contains(["UserAssigned", "SystemAssigned, UserAssigned"], try(var.instance.identity.type, "")) ? { "identity" = var.instance.identity } : {}
-
-  #name                = try(each.value.name, "uai-${var.instance.name}")
-  #resource_group_name = coalesce(lookup(var.instance, "resourcegroup", null), var.resourcegroup)
-  #location            = coalesce(lookup(var.instance, "location", null), var.location)
-  #tags                = try(each.value.tags, var.tags, null)
-#}
