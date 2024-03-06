@@ -22,17 +22,6 @@ resource "azurerm_mssql_server" "sql" {
     }
   }
 
-  #dynamic "identity" {
-  #for_each = [lookup(var.instance, "identity", { type = "SystemAssigned", identity_ids = [] })]
-
-  #content {
-  #type = identity.value.type
-  #identity_ids = var.instance.identity.type == "UserAssigned" || var.instance.identity.type == "SystemAssigned, UserAssigned" ? [
-  #azurerm_user_assigned_identity.identity["identity"].id
-  #] : []
-  #}
-  #}
-
   dynamic "azuread_administrator" {
     for_each = try(var.instance.azuread_administrator, null) != null ? { admin = var.instance.azuread_administrator } : {}
     content {
