@@ -41,7 +41,7 @@ module "kv" {
 
 module "network" {
   source  = "cloudnationhq/vnet/azure"
-  version = "~> 0.1"
+  version = "~> 2.0"
 
   naming = local.naming
 
@@ -65,11 +65,11 @@ module "sql" {
   naming = local.naming
 
   instance = {
-    name          = module.naming.mssql_server.name_unique
-    location      = module.rg.groups.demo.location
-    resourcegroup = module.rg.groups.demo.name
-    password      = module.kv.secrets.sql.value
-    public_access = true
+    name                          = module.naming.mssql_server.name_unique
+    location                      = module.rg.groups.demo.location
+    resourcegroup                 = module.rg.groups.demo.name
+    administrator_login_password  = module.kv.secrets.sql.value
+    public_network_access_enabled = true
 
     network_rules = {
       sales = { subnet_id = module.network.subnets.sales.id }

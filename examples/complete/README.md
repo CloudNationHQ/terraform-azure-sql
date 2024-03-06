@@ -5,6 +5,16 @@ This example highlights the complete usage.
 ```hcl
 module "sql" {
   source  = "cloudnationhq/sql/azure"
+  version = "~> 0.1"
+
+  naming   = local.naming
+  instance = local.instance
+}
+```
+
+```hcl
+module "sql" {
+  source  = "cloudnationhq/sql/azure"
   version = "~> 0.3"
 
   naming = local.naming

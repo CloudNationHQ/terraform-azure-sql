@@ -12,7 +12,7 @@ module "rg" {
   groups = {
     demo = {
       name   = module.naming.resource_group.name
-      region = "westeurope"
+      region = "northeurope"
     }
   }
 }
@@ -41,7 +41,7 @@ module "kv" {
 
 module "network" {
   source  = "cloudnationhq/vnet/azure"
-  version = "~> 0.1"
+  version = "~> 2.0"
 
   naming = local.naming
 
@@ -57,37 +57,6 @@ module "sql" {
   source  = "cloudnationhq/sql/azure"
   version = "~> 0.1"
 
-  naming = local.naming
-
-  instance = {
-    name          = module.naming.mssql_server.name_unique
-    location      = module.rg.groups.demo.location
-    resourcegroup = module.rg.groups.demo.name
-    password      = module.kv.secrets.sql.value
-    public_access = true
-
-    databases = {
-      user = {
-        max_size_gb = 50
-        sku         = "ElasticPool"
-        elasticpool = "appsvc"
-      }
-      orders = {
-        max_size_gb = 150
-      }
-    }
-
-    elasticpools = {
-      appsvc = {
-        max_size_gb = 50
-      }
-    }
-
-    fw_rules = {
-      sales = {
-        start_ip_address = "10.20.30.1"
-        end_ip_address   = "10.20.30.255"
-      }
-    }
-  }
+  naming   = local.naming
+  instance = local.instance
 }
