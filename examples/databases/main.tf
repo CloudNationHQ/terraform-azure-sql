@@ -46,10 +46,10 @@ module "sql" {
   naming = local.naming
 
   instance = {
-    name          = module.naming.mssql_server.name_unique
-    location      = module.rg.groups.demo.location
-    resourcegroup = module.rg.groups.demo.name
-    password      = module.kv.secrets.sql.value
+    name                         = module.naming.mssql_server.name_unique
+    location                     = module.rg.groups.demo.location
+    resourcegroup                = module.rg.groups.demo.name
+    administrator_login_password = module.kv.secrets.sql.value
 
     databases = {
       user = {

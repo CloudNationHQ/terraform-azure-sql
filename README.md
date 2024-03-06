@@ -47,8 +47,11 @@ A last key goal is to separate logic from configuration in the module, thereby e
 
 | Name | Description | Type | Required |
 | :-- | :-- | :-- | :-- |
-| `sql` | describes sql server related configuration | object | yes |
+| `instance` | describes sql server related configuration | object | yes |
 | `naming` | used for naming purposes | string | yes |
+| `location` | default azure region tho be used | string | no |
+| `resourcegroup` | default resource group to be used | string | no |
+| `tags` | tags to be added to the resources | map(string) | no |
 
 ## Outputs
 
