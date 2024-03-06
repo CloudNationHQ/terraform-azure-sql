@@ -37,5 +37,9 @@ locals {
         end_ip_address   = "10.20.30.255"
       }
     }
+
+    identity = {
+      type = "SystemAssigned, UserAssigned"
+    }
   }
 }

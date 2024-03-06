@@ -13,8 +13,16 @@ resource "azurerm_mssql_server" "sql" {
   transparent_data_encryption_key_vault_key_id = try(var.instance.transparent_data_encryption_key_vault_key_id, null)
   tags                                         = try(var.instance.tags, var.tags, null)
 
-  identity {
-    type = "SystemAssigned"
+  dynamic "identity" {
+    for_each = contains(keys(var.instance), "identity") ? [var.instance.identity] : []
+
+    content {
+      type = identity.value.type
+      identity_ids = contains(["UserAssigned", "SystemAssigned, UserAssigned"], identity.value.type) ? concat(
+        try([azurerm_user_assigned_identity.identity["identity"].id], []),
+        try(lookup(identity.value, "identity_ids", []), [])
+      ) : []
+    }
   }
 
   dynamic "azuread_administrator" {
@@ -111,4 +119,13 @@ resource "azurerm_mssql_database" "database" {
   creation_source_database_id                                = each.value.creation_source_database_id
   restore_dropped_database_id                                = each.value.restore_dropped_database_id
   tags                                                       = each.value.tags
+}
+
+resource "azurerm_user_assigned_identity" "identity" {
+  for_each = contains(["UserAssigned", "SystemAssigned, UserAssigned"], try(var.instance.identity.type, "")) ? { "identity" = var.instance.identity } : {}
+
+  name                = try(each.value.name, "uai-${var.instance.name}")
+  resource_group_name = coalesce(lookup(var.instance, "resourcegroup", null), var.resourcegroup)
+  location            = coalesce(lookup(var.instance, "location", null), var.location)
+  tags                = try(each.value.tags, var.tags, null)
 }
