@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.4.0...v0.4.1) (2024-03-06)
+
+
+### Bug Fixes
+
+* fixed duplication in database creation with elastic pool assignment ([#20](https://github.com/CloudNationHQ/terraform-azure-sql/issues/20)) ([b919899](https://github.com/CloudNationHQ/terraform-azure-sql/commit/b9198992cc4f315a709cb4f8d572f7463b9bf521))
+
 ## [0.4.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.3.0...v0.4.0) (2024-03-06)
 
 
