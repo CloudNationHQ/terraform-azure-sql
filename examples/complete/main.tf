@@ -54,8 +54,9 @@ module "network" {
 }
 
 module "sql" {
-  source  = "cloudnationhq/sql/azure"
-  version = "~> 0.1"
+  #source  = "cloudnationhq/sql/azure"
+  #version = "~> 0.1"
+  source = "../../"
 
   naming   = local.naming
   instance = local.instance
