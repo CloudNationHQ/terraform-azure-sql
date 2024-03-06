@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.3.0...v0.4.0) (2024-03-06)
+
+
+### Features
+
+* add some missing properties ([#18](https://github.com/CloudNationHQ/terraform-azure-sql/issues/18)) ([05c5b70](https://github.com/CloudNationHQ/terraform-azure-sql/commit/05c5b708c7e76a3c48f5d7a2a72752b007b35830))
+
 ## [0.3.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.2.0...v0.3.0) (2024-01-23)
 
 

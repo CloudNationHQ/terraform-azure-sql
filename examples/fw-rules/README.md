@@ -5,7 +5,7 @@ This example demonstrates configuring firewall rules for secure access managemen
 ```hcl
 module "sql" {
   source  = "cloudnationhq/sql/azure"
-  version = "~> 0.3"
+  version = "~> 0.4"
 
   naming = local.naming
 
