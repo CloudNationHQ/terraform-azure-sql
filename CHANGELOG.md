@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.5.0...v0.6.0) (2024-03-15)
+
+
+### Features
+
+* add private endpoint usage ([#25](https://github.com/CloudNationHQ/terraform-azure-sql/issues/25)) ([d236a71](https://github.com/CloudNationHQ/terraform-azure-sql/commit/d236a71f29d17810e20b6459aa44ef1730521458))
+* **deps:** bump google.golang.org/protobuf in /tests ([#24](https://github.com/CloudNationHQ/terraform-azure-sql/issues/24)) ([d2d9aaf](https://github.com/CloudNationHQ/terraform-azure-sql/commit/d2d9aafc2b156efd9f4fc3b3d1784d9653e62b7b))
+
 ## [0.5.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.4.1...v0.5.0) (2024-03-06)
 
 
