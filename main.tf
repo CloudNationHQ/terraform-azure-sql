@@ -4,7 +4,7 @@ resource "azurerm_mssql_server" "sql" {
   resource_group_name                          = coalesce(lookup(var.instance, "resourcegroup", null), var.resourcegroup)
   location                                     = coalesce(lookup(var.instance, "location", null), var.location)
   version                                      = try(var.instance.version, "12.0")
-  public_network_access_enabled                = try(var.instance.public_network_access_enabled, false)
+  public_network_access_enabled                = try(var.instance.public_network_access_enabled, true)
   administrator_login                          = try(var.instance.administrator_login, "adminLogin")
   administrator_login_password                 = var.instance.administrator_login_password
   connection_policy                            = try(var.instance.connection_policy, "Default")
