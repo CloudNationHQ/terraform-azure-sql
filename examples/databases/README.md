@@ -43,9 +43,20 @@ module "sql" {
         max_size_gb = 50
         sku         = "ElasticPool"
         elasticpool = "appsvc"
+
+        short_term_retention_policy = {
+          retention_days = 8
+        }
       }
       orders = {
         max_size_gb = 150
+
+        long_term_retention_policy = {
+          weekly_retention          = "P1W"
+          monthly_retention         = "P1M"
+          yearly_retention          = "P1Y"
+          immutable_backups_enabled = true
+        }
       }
     }
 
