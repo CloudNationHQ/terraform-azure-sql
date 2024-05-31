@@ -45,7 +45,8 @@ module "sql" {
         elasticpool = "appsvc"
 
         short_term_retention_policy = {
-          retention_days = 8
+          retention_days           = 8
+          backup_interval_in_hours = 24
         }
       }
       orders = {
