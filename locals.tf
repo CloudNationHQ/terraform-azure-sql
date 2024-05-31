@@ -29,6 +29,8 @@ locals {
       auto_pause_delay_in_minutes                                = try(db.auto_pause_delay_in_minutes, null)
       creation_source_database_id                                = try(db.creation_source_database_id, null)
       restore_dropped_database_id                                = try(db.restore_dropped_database_id, null)
+      short_term_retention_policy                                = try(db.short_term_retention_policy, null)
+      long_term_retention_policy                                 = try(db.long_term_retention_policy, null)
       tags                                                       = try(db.tags, var.tags, null)
     }
   ])
