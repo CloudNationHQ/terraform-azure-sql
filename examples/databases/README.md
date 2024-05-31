@@ -28,7 +28,7 @@ In situations where several databases reference the same elastic pool, the follo
 ```hcl
 module "sql" {
   source  = "cloudnationhq/sql/azure"
-  version = "~> 0.1"
+  version = "~> 0.6"
 
   naming = local.naming
 
