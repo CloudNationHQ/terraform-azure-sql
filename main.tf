@@ -119,6 +119,27 @@ resource "azurerm_mssql_database" "database" {
   creation_source_database_id                                = each.value.creation_source_database_id
   restore_dropped_database_id                                = each.value.restore_dropped_database_id
   tags                                                       = each.value.tags
+
+  dynamic "long_term_retention_policy" {
+    for_each = each.value.long_term_retention_policy != null ? [each.value.long_term_retention_policy] : []
+
+    content {
+      weekly_retention          = try(long_term_retention_policy.value.weekly_retention, null)
+      monthly_retention         = try(long_term_retention_policy.value.monthly_retention, null)
+      yearly_retention          = try(long_term_retention_policy.value.yearly_retention, null)
+      week_of_year              = try(long_term_retention_policy.value.week_of_year, null)
+      immutable_backups_enabled = try(long_term_retention_policy.value.immutable_backups_enabled, false)
+    }
+  }
+
+  dynamic "short_term_retention_policy" {
+    for_each = each.value.short_term_retention_policy != null ? [each.value.short_term_retention_policy] : []
+
+    content {
+      retention_days           = try(short_term_retention_policy.value.retention_days, null)
+      backup_interval_in_hours = try(short_term_retention_policy.value.backup_interval_in_hours, 12)
+    }
+  }
 }
 
 resource "azurerm_user_assigned_identity" "identity" {
