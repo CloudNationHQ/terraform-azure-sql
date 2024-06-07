@@ -38,5 +38,11 @@ Below please provide what should go into the changelog (if anything)
 <!-- What type of PR is this? -->
 This is a (please select all that apply):
 
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Bug fix (non-breaki
+- [ ] Bug Fix
+- [ ] New Feature (ie adding a service, resource, or data source)
+- [ ] Enhancement
+- [ ] Breaking change (not backwards compatible with previous releases)
+
+
+## Related Issue(s)
+Fixes #0000
