@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.7.0...v0.8.0) (2024-06-07)
+
+
+### Features
+
+* add pull request template ([#35](https://github.com/CloudNationHQ/terraform-azure-sql/issues/35)) ([230e644](https://github.com/CloudNationHQ/terraform-azure-sql/commit/230e644a741c3e5076035cccf067dedd1f0826bb))
+
 ## [0.7.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.6.0...v0.7.0) (2024-05-31)
 
 
