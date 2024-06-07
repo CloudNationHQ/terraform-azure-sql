@@ -12,7 +12,6 @@ If this is a breaking change for users please detail how it cannot be avoided an
 - [ ] I have made corresponding changes to the documentation
 - [ ] My changes generate no new warnings
 - [ ] Any dependent changes have been merged and published in downstream modules
-For example: “`resource_name_here` - description of change e.g. adding property `new_property_name_here`”
 
 
 <!-- You can erase any parts of this template below this point that are not applicable to your Pull Request. -->
