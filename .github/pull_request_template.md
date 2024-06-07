@@ -4,6 +4,7 @@
 
 If this is a breaking change for users please detail how it cannot be avoided and why it should be made in a minor version of the provider -->
 
+
 ## PR Checklist
 
 - [ ] I have checked if my changes close any open issues. If so please include appropriate [closing keywords](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword) below.
@@ -13,7 +14,9 @@ If this is a breaking change for users please detail how it cannot be avoided an
 - [ ] Any dependent changes have been merged and published in downstream modules
 For example: “`resource_name_here` - description of change e.g. adding property `new_property_name_here`”
 
+
 <!-- You can erase any parts of this template below this point that are not applicable to your Pull Request. -->
+
 
 ## Changes to existing Resource / Data Source
 
@@ -22,6 +25,7 @@ For example: “`resource_name_here` - description of change e.g. adding propert
 - [ ] I have successfully run tests with my changes locally. If not, please provide details on testing challenges that prevented you running the tests.
 - [ ] (For changes that include a **state migration only**). I have manually tested the migration path between relevant versions of the provider.
 
+
 ## Change Log
 
 Below please provide what should go into the changelog (if anything) 
@@ -29,6 +33,7 @@ Below please provide what should go into the changelog (if anything)
 <!-- Replace the changelog example below with your entry. One resource per line. -->
 
  * `azurerm_resource` - support for the `example` property [GH-00000]
+
 
 <!-- What type of PR is this? -->
 This is a (please select all that apply):
