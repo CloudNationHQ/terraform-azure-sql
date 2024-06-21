@@ -15,7 +15,7 @@ body:
         - label: I have searched the existing issues
           required: true
   - type: input
-    id: terraform
+    id: module
     attributes:
       label: Module Version
       description: Which module version are you using?
