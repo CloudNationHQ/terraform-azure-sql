@@ -56,7 +56,6 @@ body:
       label: Terraform Configuration Files
       description: |
         Please provide a minimal Terraform configuration that can reproduce the issue.
-      render: hcl
     validations:
       required: true
   - type: textarea
