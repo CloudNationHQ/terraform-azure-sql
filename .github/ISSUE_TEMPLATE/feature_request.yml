@@ -1,6 +1,6 @@
-name: "💡 Feature Request"
+name: "Feature Request"
 description: Create a new ticket for a new feature request
-title: "💡 [REQUEST] - <title>"
+title: "[REQUEST] - <title>"
 labels: [
   "question"
 ]
@@ -17,14 +17,6 @@ body:
     attributes:
       label: Description
       description: Please leave a description of the feature request here.
-    validations:
-      required: true
-  - type: input
-    id: resource
-    attributes:
-      label: New or Affected Resource(s)/Data Source(s)
-      description: Please list the new or affected resources and/or data sources.
-      placeholder: azurerm_XXXXX
     validations:
       required: true
   - type: textarea
