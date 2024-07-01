@@ -5,7 +5,7 @@ This example details a sql server setup with a private endpoint, enhancing secur
 ```hcl
 module "privatelink" {
   source  = "cloudnationhq/pe/azure"
-  version = "~> 0.8"
+  version = "~> 0.9"
 
   resourcegroup = module.rg.groups.demo.name
   location      = module.rg.groups.demo.location

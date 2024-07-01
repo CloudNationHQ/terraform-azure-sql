@@ -5,7 +5,7 @@ This example illustrates configuring multiple sql server databases.
 ```hcl
 module "sql" {
   source  = "cloudnationhq/sql/azure"
-  version = "~> 0.8"
+  version = "~> 0.9"
 
   naming = local.naming
 
