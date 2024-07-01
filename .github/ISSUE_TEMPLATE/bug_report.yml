@@ -1,6 +1,6 @@
-name: "🐛 Bug Report"
+name: "Bug Report"
 description: Create a new ticket for a bug.
-title: "🐛 [BUG] - <title>"
+title: "[BUG] - <title>"
 labels: [
   "bug"
 ]
@@ -45,9 +45,9 @@ body:
   - type: input
     id: resource
     attributes:
-      label: Affected Resource(s)/Data Source(s)
-      description: Please list the affected resources and/or data sources.
-      placeholder: azurerm_XXXXX
+      label: Short Description
+      description: Please provide a concise description of the bug.
+      placeholder: Short description
     validations:
       required: true
   - type: textarea
