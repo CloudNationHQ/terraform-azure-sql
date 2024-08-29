@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.9.0...v0.10.0) (2024-08-29)
+
+
+### Features
+
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#46](https://github.com/CloudNationHQ/terraform-azure-sql/issues/46)) ([9e1f0bd](https://github.com/CloudNationHQ/terraform-azure-sql/commit/9e1f0bd790513643275951775fe439e501cc82c8))
+* update documentation ([#47](https://github.com/CloudNationHQ/terraform-azure-sql/issues/47)) ([ab6f95a](https://github.com/CloudNationHQ/terraform-azure-sql/commit/ab6f95a3ca351026912bfb357da1947f4627f443))
+
 ## [0.9.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.8.0...v0.9.0) (2024-07-04)
 
 
