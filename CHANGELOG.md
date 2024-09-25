@@ -5,11 +5,20 @@
 
 ### ⚠ BREAKING CHANGES
 
-* * Version 4 of the azurerm provider includes breaking changes.
+* Version 4 of the azurerm provider includes breaking changes.
 
 ### Features
 
 * upgrade azurerm provider to v4 ([#50](https://github.com/CloudNationHQ/terraform-azure-sql/issues/50)) ([92fa56b](https://github.com/CloudNationHQ/terraform-azure-sql/commit/92fa56ba6aebb67f038f186190689c1f75ea861e))
+
+### Upgrade from v0.10.0 to v1.0.0:
+
+- Update module reference to: `version = "~> 1.0"`
+- Change properties in instance object:
+  - resourcegroup -> resource_group
+  - immutable_backups_enabled -> deprecated
+- Rename variable:
+  - resourcegroup -> resource_group
 
 ## [0.10.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v0.9.0...v0.10.0) (2024-08-29)
 
