@@ -1,7 +1,7 @@
 # mysql server
 resource "azurerm_mssql_server" "sql" {
   name                                         = var.instance.name
-  resource_group_name                          = coalesce(lookup(var.instance, "resourcegroup", null), var.resourcegroup)
+  resource_group_name                          = coalesce(lookup(var.instance, "resource_group", null), var.resource_group)
   location                                     = coalesce(lookup(var.instance, "location", null), var.location)
   version                                      = try(var.instance.version, "12.0")
   public_network_access_enabled                = try(var.instance.public_network_access_enabled, true)
@@ -62,7 +62,7 @@ resource "azurerm_mssql_elasticpool" "elasticpool" {
   }
 
   name                           = each.value.name
-  resource_group_name            = coalesce(lookup(var.instance, "resourcegroup", null), var.resourcegroup)
+  resource_group_name            = coalesce(lookup(var.instance, "resource_group", null), var.resource_group)
   location                       = coalesce(lookup(var.instance, "location", null), var.location)
   server_name                    = each.value.server_name
   license_type                   = each.value.license_type
@@ -124,11 +124,10 @@ resource "azurerm_mssql_database" "database" {
     for_each = each.value.long_term_retention_policy != null ? [each.value.long_term_retention_policy] : []
 
     content {
-      weekly_retention          = try(long_term_retention_policy.value.weekly_retention, null)
-      monthly_retention         = try(long_term_retention_policy.value.monthly_retention, null)
-      yearly_retention          = try(long_term_retention_policy.value.yearly_retention, null)
-      week_of_year              = try(long_term_retention_policy.value.week_of_year, null)
-      immutable_backups_enabled = try(long_term_retention_policy.value.immutable_backups_enabled, false)
+      weekly_retention  = try(long_term_retention_policy.value.weekly_retention, null)
+      monthly_retention = try(long_term_retention_policy.value.monthly_retention, null)
+      yearly_retention  = try(long_term_retention_policy.value.yearly_retention, null)
+      week_of_year      = try(long_term_retention_policy.value.week_of_year, null)
     }
   }
 
@@ -146,7 +145,7 @@ resource "azurerm_user_assigned_identity" "identity" {
   for_each = contains(["UserAssigned", "SystemAssigned, UserAssigned"], try(var.instance.identity.type, "")) ? { "identity" = var.instance.identity } : {}
 
   name                = try(each.value.name, "uai-${var.instance.name}")
-  resource_group_name = coalesce(lookup(var.instance, "resourcegroup", null), var.resourcegroup)
+  resource_group_name = coalesce(lookup(var.instance, "resource_group", null), var.resource_group)
   location            = coalesce(lookup(var.instance, "location", null), var.location)
   tags                = try(each.value.tags, var.tags, null)
 }
