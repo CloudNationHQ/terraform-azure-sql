@@ -12,9 +12,3 @@ output "databases" {
   description = "contains databases"
   value       = azurerm_mssql_database.database
 }
-
-output "server_id" {
-  description = "The ID of the Server"
-  value = azurerm_mssql_server.sql.id
-  
-}
