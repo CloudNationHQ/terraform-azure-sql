@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v1.1.0...v1.2.0) (2024-11-11)
+
+
+### Features
+
+* enhance testing with sequential, parallel modes and flags for exceptions and skip-destroy ([#56](https://github.com/CloudNationHQ/terraform-azure-sql/issues/56)) ([a60236b](https://github.com/CloudNationHQ/terraform-azure-sql/commit/a60236b4893443c7a53022766d1945f4fcb6f2dd))
+
 ## [1.1.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v1.0.0...v1.1.0) (2024-10-18)
 
 
