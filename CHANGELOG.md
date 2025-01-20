@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.3.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v1.2.0...v1.3.0) (2025-01-20)
+
+
+### Features
+
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#59](https://github.com/CloudNationHQ/terraform-azure-sql/issues/59)) ([d594a52](https://github.com/CloudNationHQ/terraform-azure-sql/commit/d594a52a4ae888a18cdf62074c44d628f93fef92))
+* **deps:** bump golang.org/x/crypto from 0.29.0 to 0.31.0 in /tests ([#62](https://github.com/CloudNationHQ/terraform-azure-sql/issues/62)) ([4c72a54](https://github.com/CloudNationHQ/terraform-azure-sql/commit/4c72a548dff1971db48ed05199db7acb71658e7f))
+* **deps:** bump golang.org/x/net from 0.31.0 to 0.33.0 in /tests ([#63](https://github.com/CloudNationHQ/terraform-azure-sql/issues/63)) ([6b2442b](https://github.com/CloudNationHQ/terraform-azure-sql/commit/6b2442bc90102555063379ca5daefe70c5586da4))
+* remove temporary files when deployment tests fails ([#60](https://github.com/CloudNationHQ/terraform-azure-sql/issues/60)) ([a2320bc](https://github.com/CloudNationHQ/terraform-azure-sql/commit/a2320bc7e1091e12a5a59eadbbecf3560017fdc2))
+
 ## [1.2.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v1.1.0...v1.2.0) (2024-11-11)
 
 
