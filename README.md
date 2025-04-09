@@ -86,7 +86,7 @@ For more information, please see our contribution [guidelines](./CONTRIBUTING.md
 
 MIT Licensed. See [LICENSE](./LICENSE) for full details.
 
-## Reference
+## References
 
 - [Documentation](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql)
 - [Rest Api](https://learn.microsoft.com/en-us/rest/api/sql/)
