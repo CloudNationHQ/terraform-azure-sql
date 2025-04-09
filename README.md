@@ -2,26 +2,6 @@
 
 This terraform module simplifies the creation and management of azure sql servers, offering a flexible and customizable solution for deploying fully-configured instances. It encapsulates best practices and provides a range of options to meet various requirements.
 
-## Goals
-
-The main objective is to create a more logic data structure, achieved by combining and grouping related resources together in a complex object.
-
-The structure of the module promotes reusability. It's intended to be a repeatable component, simplifying the process of building diverse workloads and platform accelerators consistently.
-
-A primary goal is to utilize keys and values in the object that correspond to the REST API's structure. This enables us to carry out iterations, increasing its practical value as time goes on.
-
-A last key goal is to separate logic from configuration in the module, thereby enhancing its scalability, ease of customization, and manageability.
-
-## Non-Goals
-
-These modules are not intended to be complete, ready-to-use solutions; they are designed as components for creating your own patterns.
-
-They are not tailored for a single use case but are meant to be versatile and applicable to a range of scenarios.
-
-Security standardization is applied at the pattern level, while the modules include default values based on best practices but do not enforce specific security standards.
-
-End-to-end testing is not conducted on these modules, as they are individual components and do not undergo the extensive testing reserved for complete patterns or solutions.
-
 ## Features
 
 - manages multiple sql databases and elastic pools.
@@ -75,6 +55,10 @@ End-to-end testing is not conducted on these modules, as they are individual com
 | <a name="output_server"></a> [server](#output\_server) | contains all sql server details |
 <!-- END_TF_DOCS -->
 
+## Goals
+
+For more information, please see our [goals and non-goals](./GOALS.md).
+
 ## Testing
 
 For more information, please see our testing [guidelines](./TESTING.md)
@@ -87,21 +71,22 @@ Full examples detailing all usages, along with integrations with dependency modu
 
 To update the module's documentation run `make doc`
 
-## Authors
-
-Module is maintained by [these awesome contributors](https://github.com/cloudnationhq/terraform-azure-sql/graphs/contributors).
-
-## Contributing
+## Contributors
 
 We welcome contributions from the community! Whether it's reporting a bug, suggesting a new feature, or submitting a pull request, your input is highly valued.
 
-For more information, please see our contribution [guidelines](./CONTRIBUTING.md).
+For more information, please see our contribution [guidelines](./CONTRIBUTING.md). <br><br>
+
+<a href="https://github.com/cloudnationhq/terraform-azure-sa/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=cloudnationhq/terraform-azure-sa" />
+</a>
+
 
 ## License
 
 MIT Licensed. See [LICENSE](./LICENSE) for full details.
 
-## Reference
+## References
 
 - [Documentation](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql)
 - [Rest Api](https://learn.microsoft.com/en-us/rest/api/sql/)
