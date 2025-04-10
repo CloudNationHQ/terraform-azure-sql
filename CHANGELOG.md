@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v1.4.0...v1.5.0) (2025-04-10)
+
+
+### Features
+
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#65](https://github.com/CloudNationHQ/terraform-azure-sql/issues/65)) ([1ae4970](https://github.com/CloudNationHQ/terraform-azure-sql/commit/1ae4970d2f06f546af451ba8fa00869abbdbbc09))
+* **deps:** bump golang.org/x/net from 0.33.0 to 0.36.0 in /tests ([#66](https://github.com/CloudNationHQ/terraform-azure-sql/issues/66)) ([e8a0acf](https://github.com/CloudNationHQ/terraform-azure-sql/commit/e8a0acfc2a97ca9aed64fefd11807d16c7b2a8d0))
+
+
+### Bug Fixes
+
+* update documentation ([#70](https://github.com/CloudNationHQ/terraform-azure-sql/issues/70)) ([8a27c40](https://github.com/CloudNationHQ/terraform-azure-sql/commit/8a27c40e65dbcdbf5b6cd12acc58a922b76a0b9d))
+
 ## [1.4.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v1.3.0...v1.4.0) (2025-04-09)
 
 
