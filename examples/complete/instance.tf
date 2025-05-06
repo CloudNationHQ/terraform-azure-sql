@@ -2,7 +2,7 @@ locals {
   instance = {
     name                          = module.naming.mssql_server.name_unique
     location                      = module.rg.groups.demo.location
-    resource_group                = module.rg.groups.demo.name
+    resource_group_name           = module.rg.groups.demo.name
     administrator_login_password  = module.kv.secrets.sql.value
     public_network_access_enabled = true
 
@@ -31,7 +31,7 @@ locals {
     }
 
     identity = {
-      type = "SystemAssigned, UserAssigned"
+      type = "SystemAssigned"
     }
   }
 }

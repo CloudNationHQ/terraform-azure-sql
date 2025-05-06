@@ -12,14 +12,14 @@ module "rg" {
   groups = {
     demo = {
       name     = module.naming.resource_group.name_unique
-      location = "westeurope"
+      location = "germanywestcentral"
     }
   }
 }
 
 module "kv" {
   source  = "cloudnationhq/kv/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   naming = local.naming
 
@@ -41,14 +41,14 @@ module "kv" {
 
 module "sql" {
   source  = "cloudnationhq/sql/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   naming = local.naming
 
   instance = {
     name                         = module.naming.mssql_server.name_unique
     location                     = module.rg.groups.demo.location
-    resource_group               = module.rg.groups.demo.name
+    resource_group_name          = module.rg.groups.demo.name
     administrator_login_password = module.kv.secrets.sql.value
 
     databases = {
@@ -66,10 +66,9 @@ module "sql" {
         max_size_gb = 150
 
         long_term_retention_policy = {
-          weekly_retention          = "P1W"
-          monthly_retention         = "P1M"
-          yearly_retention          = "P1Y"
-          immutable_backups_enabled = true
+          weekly_retention  = "P1W"
+          monthly_retention = "P1M"
+          yearly_retention  = "P1Y"
         }
       }
     }
