@@ -89,7 +89,6 @@ object({
     })), {})
     elasticpools = optional(map(object({
       name                           = optional(string, null)
-      server_name                    = string
       license_type                   = optional(string, "LicenseIncluded")
       max_size_gb                    = optional(number, 4)
       zone_redundant                 = optional(bool, false)
@@ -101,10 +100,10 @@ object({
       tier                           = optional(string, "Standard")
       capacity                       = optional(number, 200)
       family                         = optional(string, null)
-      per_database_settings = object({
-        min_capacity = optional(number, 0)
-        max_capacity = optional(number, 10)
-      })
+      per_database_settings = optional(object({
+        min_capacity = optional(number)
+        max_capacity = optional(number)
+      }), { min_capacity = 0, max_capacity = 10 }) # default should not be null
     })), {})
     databases = optional(map(object({
       name                                                       = optional(string, null)
@@ -113,7 +112,7 @@ object({
       read_scale                                                 = optional(bool, false)
       zone_redundant                                             = optional(bool, false)
       sku                                                        = optional(string, "S0")
-      # elasticpool                                                = optional(string, null)
+      elasticpool                                                = optional(string, null)
       min_capacity                                               = optional(number, null)
       create_mode                                                = optional(string, "Default")
       license_type                                               = optional(string, null)
@@ -135,6 +134,7 @@ object({
       restore_dropped_database_id                                = optional(string, null)
       secondary_type                                             = optional(string, null)
       tags                                                       = optional(map(string))
+      restore_long_term_retention_backup_id                      = optional(string, null)
       identity = optional(object({
         type         = string
         identity_ids = optional(list(string), [])
