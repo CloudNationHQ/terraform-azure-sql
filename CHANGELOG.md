@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v1.5.0...v2.0.0) (2025-05-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* The data structure changed, causing a recreate on existing resources.
+
+### Features
+
+* add type definitions and small refactor ([#73](https://github.com/CloudNationHQ/terraform-azure-sql/issues/73)) ([7a21e2f](https://github.com/CloudNationHQ/terraform-azure-sql/commit/7a21e2f77bd7c3958b9611d8eb49c65d375563e5))
+
 ## [1.5.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v1.4.0...v1.5.0) (2025-04-10)
 
 
