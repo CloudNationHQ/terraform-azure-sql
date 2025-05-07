@@ -12,14 +12,14 @@ module "rg" {
   groups = {
     demo = {
       name     = module.naming.resource_group.name_unique
-      location = "westeurope"
+      location = "germanywestcentral"
     }
   }
 }
 
 module "kv" {
   source  = "cloudnationhq/kv/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   naming = local.naming
 
@@ -41,7 +41,7 @@ module "kv" {
 
 module "network" {
   source  = "cloudnationhq/vnet/azure"
-  version = "~> 4.0"
+  version = "~> 8.0"
 
   naming = local.naming
 
@@ -49,31 +49,41 @@ module "network" {
     name           = module.naming.virtual_network.name
     location       = module.rg.groups.demo.location
     resource_group = module.rg.groups.demo.name
-    cidr           = ["10.19.0.0/16"]
+    address_space  = ["10.19.0.0/16"]
 
     subnets = {
-      sales = { cidr = ["10.19.1.0/24"], endpoints = ["Microsoft.Sql"] }
-      hr    = { cidr = ["10.19.2.0/24"], endpoints = ["Microsoft.Sql"] }
+      sales = {
+        address_prefixes  = ["10.19.1.0/24"],
+        service_endpoints = ["Microsoft.Sql"]
+      }
+      hr = {
+        address_prefixes  = ["10.19.2.0/24"],
+        service_endpoints = ["Microsoft.Sql"]
+      }
     }
   }
 }
 
 module "sql" {
   source  = "cloudnationhq/sql/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   naming = local.naming
 
   instance = {
     name                          = module.naming.mssql_server.name_unique
     location                      = module.rg.groups.demo.location
-    resource_group                = module.rg.groups.demo.name
+    resource_group_name           = module.rg.groups.demo.name
     administrator_login_password  = module.kv.secrets.sql.value
     public_network_access_enabled = true
 
     network_rules = {
-      sales = { subnet_id = module.network.subnets.sales.id }
-      hr    = { subnet_id = module.network.subnets.hr.id }
+      sales = {
+        subnet_id = module.network.subnets.sales.id
+      }
+      hr = {
+        subnet_id = module.network.subnets.hr.id
+      }
     }
   }
 }

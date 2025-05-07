@@ -12,14 +12,14 @@ module "rg" {
   groups = {
     demo = {
       name     = module.naming.resource_group.name_unique
-      location = "westeurope"
+      location = "germanywestcentral"
     }
   }
 }
 
 module "network" {
   source  = "cloudnationhq/vnet/azure"
-  version = "~> 4.0"
+  version = "~> 8.0"
 
   naming = local.naming
 
@@ -27,12 +27,12 @@ module "network" {
     name           = module.naming.virtual_network.name
     location       = module.rg.groups.demo.location
     resource_group = module.rg.groups.demo.name
-    cidr           = ["10.19.0.0/16"]
+    address_space  = ["10.19.0.0/16"]
 
     subnets = {
       sn1 = {
-        nsg  = {}
-        cidr = ["10.19.1.0/24"]
+        network_security_group = {}
+        address_prefixes       = ["10.19.1.0/24"]
       }
     }
   }
@@ -40,7 +40,7 @@ module "network" {
 
 module "kv" {
   source  = "cloudnationhq/kv/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   naming = local.naming
 
@@ -62,14 +62,14 @@ module "kv" {
 
 module "sql" {
   source  = "cloudnationhq/sql/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   naming = local.naming
 
   instance = {
     name                          = module.naming.mssql_server.name_unique
     location                      = module.rg.groups.demo.location
-    resource_group                = module.rg.groups.demo.name
+    resource_group_name           = module.rg.groups.demo.name
     administrator_login_password  = module.kv.secrets.sql.value
     public_network_access_enabled = false
   }
@@ -77,17 +77,19 @@ module "sql" {
 
 module "private_dns" {
   source  = "cloudnationhq/pdns/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   resource_group = module.rg.groups.demo.name
 
   zones = {
-    sql = {
-      name = "privatelink.database.windows.net"
-      virtual_network_links = {
-        link1 = {
-          virtual_network_id   = module.network.vnet.id
-          registration_enabled = true
+    private = {
+      sql = {
+        name = "privatelink.database.windows.net"
+        virtual_network_links = {
+          link1 = {
+            virtual_network_id   = module.network.vnet.id
+            registration_enabled = true
+          }
         }
       }
     }
