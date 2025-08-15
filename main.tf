@@ -11,11 +11,13 @@ resource "azurerm_mssql_server" "sql" {
     ), var.location
   )
 
-  name                                         = var.instance.name
-  version                                      = var.instance.version
-  public_network_access_enabled                = var.instance.public_network_access_enabled
-  primary_user_assigned_identity_id            = var.instance.primary_user_assigned_identity_id
-  administrator_login                          = var.instance.administrator_login
+  name                              = var.instance.name
+  version                           = var.instance.version
+  public_network_access_enabled     = var.instance.public_network_access_enabled
+  primary_user_assigned_identity_id = var.instance.primary_user_assigned_identity_id
+  administrator_login = var.instance.administrator_login_password != null ? coalesce(
+    var.instance.administrator_login, "adminLogin") : var.instance.administrator_login_password_wo != null ? coalesce(
+  var.instance.administrator_login, "adminLogin") : null
   administrator_login_password                 = var.instance.administrator_login_password
   administrator_login_password_wo              = var.instance.administrator_login_password_wo
   administrator_login_password_wo_version      = var.instance.administrator_login_password_wo_version
