@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.1](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.0.0...v2.0.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* default for administrator_login, allow for null, update makefile to test module with local source ([#78](https://github.com/CloudNationHQ/terraform-azure-sql/issues/78)) ([a21e8c5](https://github.com/CloudNationHQ/terraform-azure-sql/commit/a21e8c530a42307147598a92ce4412d9f4585ca6))
+* indentation ([63dd8e0](https://github.com/CloudNationHQ/terraform-azure-sql/commit/63dd8e0c2c5da9f6a1d15e95dff8065a9b66a0a8))
+
 ## [2.0.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v1.5.0...v2.0.0) (2025-05-07)
 
 
