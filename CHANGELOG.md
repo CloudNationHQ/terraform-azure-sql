@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.0.1...v2.1.0) (2025-11-25)
+
+
+### Features
+
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#86](https://github.com/CloudNationHQ/terraform-azure-sql/issues/86)) ([28dcd42](https://github.com/CloudNationHQ/terraform-azure-sql/commit/28dcd428e059a20e3ff99f18161cc15d5a82c46f))
+* **deps:** bump github.com/ulikunitz/xz from 0.5.10 to 0.5.14 in /tests ([#81](https://github.com/CloudNationHQ/terraform-azure-sql/issues/81)) ([4f857b7](https://github.com/CloudNationHQ/terraform-azure-sql/commit/4f857b7baae2c815c8d9905e5e9155422b89b776))
+* increment all module version examples to the latest ([#88](https://github.com/CloudNationHQ/terraform-azure-sql/issues/88)) ([0b40ebf](https://github.com/CloudNationHQ/terraform-azure-sql/commit/0b40ebfc4069f6fc3bb3f9f8e4ef5381426c7d45))
+
 ## [2.0.1](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.0.0...v2.0.1) (2025-08-15)
 
 
