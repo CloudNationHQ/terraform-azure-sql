@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.3.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.2.0...v2.3.0) (2026-03-05)
+
+
+### Features
+
+* add immutable backups support to long term retention policy ([#94](https://github.com/CloudNationHQ/terraform-azure-sql/issues/94)) ([4d8ae78](https://github.com/CloudNationHQ/terraform-azure-sql/commit/4d8ae78176b7eab817f7fc70e3c44ed3db0bb9d6))
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#95](https://github.com/CloudNationHQ/terraform-azure-sql/issues/95)) ([578a5e3](https://github.com/CloudNationHQ/terraform-azure-sql/commit/578a5e34c0615ee71e6bcfc72dc1007b39e69c90))
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#97](https://github.com/CloudNationHQ/terraform-azure-sql/issues/97)) ([2707973](https://github.com/CloudNationHQ/terraform-azure-sql/commit/270797391a2eccbe9032909bdf733789a312a82c))
+
 ## [2.2.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.1.0...v2.2.0) (2026-01-23)
 
 
