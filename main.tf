@@ -191,10 +191,11 @@ resource "azurerm_mssql_database" "database" {
     for_each = each.value.long_term_retention_policy != null ? [each.value.long_term_retention_policy] : []
 
     content {
-      weekly_retention  = long_term_retention_policy.value.weekly_retention
-      monthly_retention = long_term_retention_policy.value.monthly_retention
-      yearly_retention  = long_term_retention_policy.value.yearly_retention
-      week_of_year      = long_term_retention_policy.value.week_of_year
+      weekly_retention          = long_term_retention_policy.value.weekly_retention
+      monthly_retention         = long_term_retention_policy.value.monthly_retention
+      yearly_retention          = long_term_retention_policy.value.yearly_retention
+      week_of_year              = long_term_retention_policy.value.week_of_year
+      immutable_backups_enabled = long_term_retention_policy.value.immutable_backups_enabled
     }
   }
 

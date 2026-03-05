@@ -106,10 +106,11 @@ variable "instance" {
         storage_endpoint           = optional(string)
       }))
       long_term_retention_policy = optional(object({
-        weekly_retention  = optional(string)
-        monthly_retention = optional(string)
-        yearly_retention  = optional(string)
-        week_of_year      = optional(number)
+        weekly_retention          = optional(string)
+        monthly_retention         = optional(string)
+        yearly_retention          = optional(string)
+        week_of_year              = optional(number)
+        immutable_backups_enabled = optional(bool, false)
       }))
       short_term_retention_policy = optional(object({
         retention_days           = optional(number)
