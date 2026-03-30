@@ -16,7 +16,11 @@ variable "instance" {
     minimum_tls_version                          = optional(string, "1.2")
     outbound_network_restriction_enabled         = optional(bool, false)
     transparent_data_encryption_key_vault_key_id = optional(string)
-    tags                                         = optional(map(string))
+    transparent_data_encryption = optional(object({
+      key_vault_key_id      = optional(string)
+      auto_rotation_enabled = optional(bool)
+    }))
+    tags = optional(map(string))
     identity = optional(object({
       type         = string
       identity_ids = optional(list(string), [])

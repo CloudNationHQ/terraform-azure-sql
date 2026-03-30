@@ -52,6 +52,15 @@ resource "azurerm_mssql_server" "sql" {
   }
 }
 
+# transparent data encryption
+resource "azurerm_mssql_server_transparent_data_encryption" "tde" {
+  for_each = var.instance.transparent_data_encryption != null ? { this = {} } : {}
+
+  server_id             = azurerm_mssql_server.sql.id
+  key_vault_key_id      = var.instance.transparent_data_encryption.key_vault_key_id
+  auto_rotation_enabled = var.instance.transparent_data_encryption.auto_rotation_enabled
+}
+
 # network rules
 resource "azurerm_mssql_virtual_network_rule" "vnetrule" {
   for_each = lookup(var.instance, "network_rules", {}) != null ? lookup(var.instance, "network_rules", {}) : {}
