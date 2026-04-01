@@ -39,6 +39,7 @@ The following resources are used by this module:
 - [azurerm_mssql_elasticpool.elasticpool](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_elasticpool) (resource)
 - [azurerm_mssql_firewall_rule.firewallrule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule) (resource)
 - [azurerm_mssql_server.sql](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server) (resource)
+- [azurerm_mssql_server_transparent_data_encryption.tde](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption) (resource)
 - [azurerm_mssql_virtual_network_rule.vnetrule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_virtual_network_rule) (resource)
 
 ## Required Inputs
@@ -68,7 +69,11 @@ object({
     minimum_tls_version                          = optional(string, "1.2")
     outbound_network_restriction_enabled         = optional(bool, false)
     transparent_data_encryption_key_vault_key_id = optional(string)
-    tags                                         = optional(map(string))
+    transparent_data_encryption = optional(object({
+      key_vault_key_id      = optional(string)
+      auto_rotation_enabled = optional(bool)
+    }))
+    tags = optional(map(string))
     identity = optional(object({
       type         = string
       identity_ids = optional(list(string), [])
@@ -158,10 +163,11 @@ object({
         storage_endpoint           = optional(string)
       }))
       long_term_retention_policy = optional(object({
-        weekly_retention  = optional(string)
-        monthly_retention = optional(string)
-        yearly_retention  = optional(string)
-        week_of_year      = optional(number)
+        weekly_retention          = optional(string)
+        monthly_retention         = optional(string)
+        yearly_retention          = optional(string)
+        week_of_year              = optional(number)
+        immutable_backups_enabled = optional(bool, false)
       }))
       short_term_retention_policy = optional(object({
         retention_days           = optional(number)
