@@ -223,9 +223,21 @@ Description: contains databases
 
 Description: contains elastic pools
 
+### <a name="output_fw_rules"></a> [fw\_rules](#output\_fw\_rules)
+
+Description: contains firewall rules
+
+### <a name="output_network_rules"></a> [network\_rules](#output\_network\_rules)
+
+Description: contains virtual network rules
+
 ### <a name="output_server"></a> [server](#output\_server)
 
 Description: contains all sql server details
+
+### <a name="output_tde"></a> [tde](#output\_tde)
+
+Description: contains transparent data encryption details
 <!-- END_TF_DOCS -->
 
 ## Goals
