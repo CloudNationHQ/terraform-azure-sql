@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.4.0...v2.5.0) (2026-04-03)
+
+
+### Features
+
+* add missing outputs ([#101](https://github.com/CloudNationHQ/terraform-azure-sql/issues/101)) ([8694430](https://github.com/CloudNationHQ/terraform-azure-sql/commit/8694430672d1428e52e21381cfec31d61da5b815))
+
 ## [2.4.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.3.0...v2.4.0) (2026-04-01)
 
 
