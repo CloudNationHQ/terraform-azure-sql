@@ -51,7 +51,7 @@ module "sql" {
     resource_group_name          = module.rg.groups.demo.name
     administrator_login_password = module.kv.secrets.sql.value
 
-    elasticpool = {
+    elasticpools = {
       appsvc = {
         max_size_gb = 50
       }
