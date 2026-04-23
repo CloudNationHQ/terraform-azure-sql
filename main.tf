@@ -103,14 +103,15 @@ resource "azurerm_mssql_elasticpool" "elasticpool" {
     each.value.name, join("-", [var.naming.mssql_elasticpool, each.key])
   )
 
-  server_name                    = azurerm_mssql_server.sql.name
-  license_type                   = each.value.license_type
-  max_size_gb                    = each.value.max_size_gb
-  zone_redundant                 = each.value.zone_redundant
-  enclave_type                   = each.value.enclave_type
-  maintenance_configuration_name = each.value.maintenance_configuration_name
-  max_size_bytes                 = each.value.max_size_bytes
-  tags                           = each.value.tags
+  server_name                     = azurerm_mssql_server.sql.name
+  license_type                    = each.value.license_type
+  max_size_gb                     = each.value.max_size_gb
+  zone_redundant                  = each.value.zone_redundant
+  enclave_type                    = each.value.enclave_type
+  maintenance_configuration_name  = each.value.maintenance_configuration_name
+  max_size_bytes                  = each.value.max_size_bytes
+  high_availability_replica_count = each.value.high_availability_replica_count
+  tags                            = each.value.tags
 
   sku {
     name     = each.value.sku
