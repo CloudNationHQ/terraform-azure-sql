@@ -100,6 +100,7 @@ object({
       enclave_type                   = optional(string)
       maintenance_configuration_name = optional(string)
       max_size_bytes                 = optional(number)
+      high_availability_replica_count = optional(number)
       tags                           = optional(map(string))
       sku                            = optional(string, "StandardPool")
       tier                           = optional(string, "Standard")
