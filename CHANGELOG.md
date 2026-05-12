@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.6.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.5.0...v2.6.0) (2026-05-12)
+
+
+### Features
+
+* add high availability replica count support for elastic pool ([#113](https://github.com/CloudNationHQ/terraform-azure-sql/issues/113)) ([ca0f8f9](https://github.com/CloudNationHQ/terraform-azure-sql/commit/ca0f8f95bb56bc143148965584efe7a081abbbec))
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#111](https://github.com/CloudNationHQ/terraform-azure-sql/issues/111)) ([2492c7e](https://github.com/CloudNationHQ/terraform-azure-sql/commit/2492c7e834144c64b763a50f21b29bce754b3812))
+
 ## [2.5.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.4.0...v2.5.0) (2026-04-03)
 
 
