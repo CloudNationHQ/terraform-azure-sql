@@ -16,6 +16,8 @@ Integrates seamlessly with private endpoint capabilities for direct and secure c
 
 Supports both system and multiple user assigned identities
 
+Supports Entra-only authentication with automatic Directory Readers role assignment
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -23,24 +25,35 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.0)
 
+- <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) (~> 3.0)
+
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
+
+- <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
 
 ## Providers
 
 The following providers are used by this module:
 
+- <a name="provider_azuread"></a> [azuread](#provider\_azuread) (~> 3.0)
+
 - <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
+
+- <a name="provider_time"></a> [time](#provider\_time) (~> 0.9)
 
 ## Resources
 
 The following resources are used by this module:
 
+- [azuread_directory_role.reader](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/directory_role) (resource)
+- [azuread_directory_role_assignment.role](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/directory_role_assignment) (resource)
 - [azurerm_mssql_database.database](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database) (resource)
 - [azurerm_mssql_elasticpool.elasticpool](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_elasticpool) (resource)
 - [azurerm_mssql_firewall_rule.firewallrule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule) (resource)
 - [azurerm_mssql_server.sql](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server) (resource)
 - [azurerm_mssql_server_transparent_data_encryption.tde](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption) (resource)
 - [azurerm_mssql_virtual_network_rule.vnetrule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_virtual_network_rule) (resource)
+- [time_sleep.wait_after_directory_role_assignment](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) (resource)
 
 ## Required Inputs
 
