@@ -50,8 +50,6 @@ resource "azurerm_mssql_server" "sql" {
       azuread_authentication_only = azuread_administrator.value.azuread_authentication_only
     }
   }
-
-  depends_on = [time_sleep.wait_after_directory_role_assignment]
 }
 
 ## In order to set an Active Directory Admin, you need to assign the Directory Readers role to the system assigned managed identity of the SQL Server.
