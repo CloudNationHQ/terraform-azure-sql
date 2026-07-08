@@ -1,3 +1,14 @@
+locals {
+  ad_admin_enabled = try(var.instance.azuread_administrator, null) != null
+  user_identity    = try(var.instance.identity, null)
+
+  identity_type = local.ad_admin_enabled ? (
+    local.user_identity == null ? "SystemAssigned" :
+    local.user_identity.type == "UserAssigned" ? "SystemAssigned, UserAssigned" :
+    local.user_identity.type
+  ) : (local.user_identity != null ? local.user_identity.type : null)
+}
+
 # mysql server
 resource "azurerm_mssql_server" "sql" {
   resource_group_name = coalesce(
@@ -32,11 +43,11 @@ resource "azurerm_mssql_server" "sql" {
   )
 
   dynamic "identity" {
-    for_each = lookup(var.instance, "identity", null) != null ? [var.instance.identity] : []
+    for_each = local.identity_type != null ? [1] : []
 
     content {
-      type         = identity.value.type
-      identity_ids = identity.value.identity_ids
+      type         = local.identity_type
+      identity_ids = local.user_identity != null ? local.user_identity.identity_ids : []
     }
   }
 
