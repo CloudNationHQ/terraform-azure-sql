@@ -39,6 +39,10 @@ module "kv" {
   }
 }
 
+data "azuread_group" "db_admin" {
+  display_name = "db-administrators"
+}
+
 module "sql" {
   source  = "cloudnationhq/sql/azure"
   version = "~> 2.0"
@@ -50,5 +54,10 @@ module "sql" {
     location                     = module.rg.groups.demo.location
     resource_group_name          = module.rg.groups.demo.name
     administrator_login_password = module.kv.secrets.sql.value
+
+    azuread_administrator = {
+      login_username = data.azuread_group.db_admin.display_name
+      object_id      = data.azuread_group.db_admin.object_id
+    }
   }
 }
