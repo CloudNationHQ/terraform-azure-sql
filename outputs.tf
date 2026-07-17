@@ -27,3 +27,9 @@ output "fw_rules" {
   description = "contains firewall rules"
   value       = azurerm_mssql_firewall_rule.firewallrule
 }
+
+output "extended_auditing_policy" {
+  description = "contains extended auditing policy details"
+  value       = azurerm_mssql_server_extended_auditing_policy.this
+  sensitive   = true
+}

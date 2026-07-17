@@ -30,9 +30,7 @@ module "uai" {
 
 module "kv" {
   source  = "cloudnationhq/kv/azure"
-  version = "~> 4.0"
-
-  naming = local.naming
+  version = "~> 5.0"
 
   vault = {
     name                = module.naming.key_vault.name_unique
@@ -60,7 +58,7 @@ module "kv" {
 
 module "rbac" {
   source  = "cloudnationhq/rbac/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   role_assignments = {
     sql-identity = {
@@ -69,7 +67,7 @@ module "rbac" {
       roles = {
         "Key Vault Crypto Service Encryption User" = {
           scopes = {
-            kv = module.kv.vault.id
+            kv = { id = module.kv.vault.id }
           }
         }
       }

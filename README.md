@@ -39,6 +39,7 @@ The following resources are used by this module:
 - [azurerm_mssql_elasticpool.elasticpool](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_elasticpool) (resource)
 - [azurerm_mssql_firewall_rule.firewallrule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule) (resource)
 - [azurerm_mssql_server.sql](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server) (resource)
+- [azurerm_mssql_server_extended_auditing_policy.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy) (resource)
 - [azurerm_mssql_server_transparent_data_encryption.tde](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption) (resource)
 - [azurerm_mssql_virtual_network_rule.vnetrule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_virtual_network_rule) (resource)
 
@@ -93,24 +94,35 @@ object({
       end_ip_address   = string
     })), {})
     elasticpools = optional(map(object({
-      name                           = optional(string)
-      license_type                   = optional(string, "LicenseIncluded")
-      max_size_gb                    = optional(number, 4)
-      zone_redundant                 = optional(bool, false)
-      enclave_type                   = optional(string)
-      maintenance_configuration_name = optional(string)
-      max_size_bytes                 = optional(number)
+      name                            = optional(string)
+      license_type                    = optional(string, "LicenseIncluded")
+      max_size_gb                     = optional(number, 4)
+      zone_redundant                  = optional(bool, false)
+      enclave_type                    = optional(string)
+      maintenance_configuration_name  = optional(string)
+      max_size_bytes                  = optional(number)
       high_availability_replica_count = optional(number)
-      tags                           = optional(map(string))
-      sku                            = optional(string, "StandardPool")
-      tier                           = optional(string, "Standard")
-      capacity                       = optional(number, 200)
-      family                         = optional(string)
+      tags                            = optional(map(string))
+      sku                             = optional(string, "StandardPool")
+      tier                            = optional(string, "Standard")
+      capacity                        = optional(number, 200)
+      family                          = optional(string)
       per_database_settings = optional(object({
         min_capacity = optional(number)
         max_capacity = optional(number)
       }), { min_capacity = 0, max_capacity = 10 }) # default should not be null
     })), {})
+    extended_auditing_policy = optional(object({
+      enabled                                 = optional(bool)
+      storage_endpoint                        = optional(string)
+      storage_account_access_key              = optional(string)
+      storage_account_access_key_is_secondary = optional(bool)
+      storage_account_subscription_id         = optional(string)
+      retention_in_days                       = optional(number)
+      log_monitoring_enabled                  = optional(bool)
+      predicate_expression                    = optional(string)
+      audit_actions_and_groups                = optional(list(string))
+    }))
     databases = optional(map(object({
       name                                                       = optional(string)
       collation                                                  = optional(string, "SQL_Latin1_General_CP1_CI_AS")
@@ -223,6 +235,10 @@ Description: contains databases
 ### <a name="output_elasticpools"></a> [elasticpools](#output\_elasticpools)
 
 Description: contains elastic pools
+
+### <a name="output_extended_auditing_policy"></a> [extended\_auditing\_policy](#output\_extended\_auditing\_policy)
+
+Description: contains extended auditing policy details
 
 ### <a name="output_fw_rules"></a> [fw\_rules](#output\_fw\_rules)
 

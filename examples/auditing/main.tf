@@ -49,13 +49,9 @@ module "sql" {
     resource_group_name          = module.rg.groups.demo.name
     administrator_login_password = module.kv.secrets.sql.value
 
-    elasticpool = {
-      appsvc = {
-        max_size_gb = 50
-      }
-      webapp = {
-        max_size_gb = 100
-      }
+    extended_auditing_policy = {
+      log_monitoring_enabled = true
+      retention_in_days      = 90
     }
   }
 }

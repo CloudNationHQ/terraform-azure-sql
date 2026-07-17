@@ -52,6 +52,22 @@ resource "azurerm_mssql_server" "sql" {
   }
 }
 
+# extended auditing policy
+resource "azurerm_mssql_server_extended_auditing_policy" "this" {
+  for_each = lookup(var.instance, "extended_auditing_policy", null) != null ? { this = var.instance.extended_auditing_policy } : {}
+
+  server_id                               = azurerm_mssql_server.sql.id
+  enabled                                 = each.value.enabled
+  storage_endpoint                        = each.value.storage_endpoint
+  storage_account_access_key              = each.value.storage_account_access_key
+  storage_account_access_key_is_secondary = each.value.storage_account_access_key_is_secondary
+  storage_account_subscription_id         = each.value.storage_account_subscription_id
+  retention_in_days                       = each.value.retention_in_days
+  log_monitoring_enabled                  = each.value.log_monitoring_enabled
+  predicate_expression                    = each.value.predicate_expression
+  audit_actions_and_groups                = each.value.audit_actions_and_groups
+}
+
 # transparent data encryption
 resource "azurerm_mssql_server_transparent_data_encryption" "tde" {
   for_each = var.instance.transparent_data_encryption != null ? { this = {} } : {}
