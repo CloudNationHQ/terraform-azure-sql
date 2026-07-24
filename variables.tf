@@ -28,6 +28,7 @@ variable "instance" {
     azuread_administrator = optional(object({
       login_username              = optional(string)
       object_id                   = optional(string)
+      object_type                 = optional(string, "Group")
       tenant_id                   = optional(string)
       azuread_authentication_only = optional(bool)
     }))
@@ -123,6 +124,19 @@ variable "instance" {
       }))
     })), {})
   })
+
+  validation {
+    condition = try(var.instance.azuread_administrator, null) == null ? true : contains(
+      ["User", "Group", "ServicePrincipal"],
+      var.instance.azuread_administrator.object_type
+    )
+    error_message = "azuread_administrator.object_type must be one of: User, Group, ServicePrincipal."
+  }
+
+  validation {
+    condition     = try(var.instance.azuread_administrator, null) == null ? true : var.instance.azuread_administrator.object_id != null || var.instance.azuread_administrator.login_username != null
+    error_message = "azuread_administrator requires either object_id or login_username to identify the principal."
+  }
 }
 
 variable "naming" {
