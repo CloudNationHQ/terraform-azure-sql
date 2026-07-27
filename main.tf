@@ -82,25 +82,6 @@ resource "azurerm_mssql_server" "sql" {
   }
 }
 
-## In order to set an Active Directory Admin, you need to assign the Directory Readers role to the system assigned managed identity of the SQL Server.
-resource "azuread_directory_role" "reader" {
-  for_each     = try(var.instance.azuread_administrator, null) != null ? { "default" = {} } : {}
-  display_name = "Directory Readers"
-}
-
-resource "azuread_directory_role_assignment" "role" {
-  for_each            = try(var.instance.azuread_administrator, null) != null ? { "default" = {} } : {}
-  role_id             = azuread_directory_role.reader["default"].template_id
-  principal_object_id = azurerm_mssql_server.sql.identity[0].principal_id
-}
-
-resource "time_sleep" "wait_after_directory_role_assignment" {
-  for_each = try(var.instance.azuread_administrator, null) != null ? { "default" = {} } : {}
-
-  depends_on      = [azuread_directory_role_assignment.role]
-  create_duration = "10s"
-}
-
 # transparent data encryption
 resource "azurerm_mssql_server_transparent_data_encryption" "tde" {
   for_each = var.instance.transparent_data_encryption != null ? { this = {} } : {}

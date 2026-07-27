@@ -39,6 +39,10 @@ module "kv" {
   }
 }
 
+data "azuread_group" "db_admin" {
+  display_name = "db-administrators"
+}
+
 module "sql" {
   source  = "cloudnationhq/sql/azure"
   version = "~> 2.0"
@@ -52,8 +56,8 @@ module "sql" {
     administrator_login_password = module.kv.secrets.sql.value
 
     azuread_administrator = {
-      login_username              = "db-administrators"
-      object_type                 = "Group"
+      login_username              = data.azuread_group.db_admin.display_name
+      object_id                   = data.azuread_group.db_admin.object_id
       azuread_authentication_only = true
     }
   }
