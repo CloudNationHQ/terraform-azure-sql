@@ -50,9 +50,5 @@ module "sql" {
     location                     = module.rg.groups.demo.location
     resource_group_name          = module.rg.groups.demo.name
     administrator_login_password = module.kv.secrets.sql.value
-
-    azuread_administrator = {
-      login_username = "db-administrators"
-    }
   }
 }
