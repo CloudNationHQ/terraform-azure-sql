@@ -44,8 +44,8 @@ data "azuread_group" "db_admin" {
 }
 
 module "sql" {
-  source  = "cloudnationhq/sql/azure"
-  version = "~> 2.0"
+  source = "../../"
+  # version = "~> 2.0"
 
   naming = local.naming
 
@@ -59,6 +59,13 @@ module "sql" {
       login_username              = data.azuread_group.db_admin.display_name
       object_id                   = data.azuread_group.db_admin.object_id
       azuread_authentication_only = true
+    }
+
+    databases = {
+      test = {
+        sku         = "Basic"
+        max_size_gb = 2
+      }
     }
   }
 }
