@@ -16,6 +16,8 @@ Integrates seamlessly with private endpoint capabilities for direct and secure c
 
 Supports both system and multiple user assigned identities
 
+Supports Entra-only authentication with automatic Directory Readers role assignment
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -23,11 +25,17 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.0)
 
+- <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) (~> 3.0)
+
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
+
+- <a name="requirement_time"></a> [time](#requirement\_time) (~> 0.9)
 
 ## Providers
 
 The following providers are used by this module:
+
+- <a name="provider_azuread"></a> [azuread](#provider\_azuread) (~> 3.0)
 
 - <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
 
@@ -42,6 +50,9 @@ The following resources are used by this module:
 - [azurerm_mssql_server_extended_auditing_policy.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy) (resource)
 - [azurerm_mssql_server_transparent_data_encryption.tde](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption) (resource)
 - [azurerm_mssql_virtual_network_rule.vnetrule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_virtual_network_rule) (resource)
+- [azuread_group.db_admin](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/group) (data source)
+- [azuread_service_principal.db_admin](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/service_principal) (data source)
+- [azuread_user.db_admin](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/user) (data source)
 
 ## Required Inputs
 
@@ -82,6 +93,7 @@ object({
     azuread_administrator = optional(object({
       login_username              = optional(string)
       object_id                   = optional(string)
+      object_type                 = optional(string, "Group")
       tenant_id                   = optional(string)
       azuread_authentication_only = optional(bool)
     }))
