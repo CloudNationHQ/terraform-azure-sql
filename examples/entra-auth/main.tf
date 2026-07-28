@@ -44,8 +44,8 @@ data "azuread_group" "db_admin" {
 }
 
 module "sql" {
-  source = "../../"
-  # version = "~> 2.0"
+  source  = "cloudnationhq/sql/azure"
+  version = "~> 2.0"
 
   naming = local.naming
 
