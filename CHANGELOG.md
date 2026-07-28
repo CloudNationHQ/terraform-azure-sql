@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.7.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.6.0...v2.7.0) (2026-07-28)
+
+
+### Features
+
+* **deps:** bump golang.org/x/crypto from 0.45.0 to 0.52.0 in /tests ([#116](https://github.com/CloudNationHQ/terraform-azure-sql/issues/116)) ([41fa0cc](https://github.com/CloudNationHQ/terraform-azure-sql/commit/41fa0cc7386cbbe105e23c9294ce9d865560ebdf))
+* grant Directory Readers role to server identity for Entra auth ([#115](https://github.com/CloudNationHQ/terraform-azure-sql/issues/115)) ([b725ec6](https://github.com/CloudNationHQ/terraform-azure-sql/commit/b725ec667c6e8a8bfa09c8fa27f32dabe21edbde))
+
 ## [2.6.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.5.0...v2.6.0) (2026-05-12)
 
 
