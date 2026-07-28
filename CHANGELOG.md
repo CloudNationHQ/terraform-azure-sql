@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.7.0...v2.8.0) (2026-07-28)
+
+
+### Features
+
+* add extended auditing policy & update module versions in examples ([#119](https://github.com/CloudNationHQ/terraform-azure-sql/issues/119)) ([b3666d1](https://github.com/CloudNationHQ/terraform-azure-sql/commit/b3666d1888a7a5cd300cdbead1142d52e2afac05))
+
 ## [2.7.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.6.0...v2.7.0) (2026-07-28)
 
 
