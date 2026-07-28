@@ -1,3 +1,24 @@
+# database administrator can be a user, group or service principal (enterprise app);
+# object_id is resolved from Entra ID by login_username unless it's supplied directly.
+data "azuread_user" "db_admin" {
+  for_each = try(var.instance.azuread_administrator, null) != null && var.instance.azuread_administrator.object_id == null && var.instance.azuread_administrator.object_type == "User" ? { "default" = {} } : {}
+
+  user_principal_name = var.instance.azuread_administrator.login_username
+}
+
+data "azuread_group" "db_admin" {
+  for_each = try(var.instance.azuread_administrator, null) != null && var.instance.azuread_administrator.object_id == null && var.instance.azuread_administrator.object_type == "Group" ? { "default" = {} } : {}
+
+  display_name = var.instance.azuread_administrator.login_username
+}
+
+data "azuread_service_principal" "db_admin" {
+  for_each = try(var.instance.azuread_administrator, null) != null && var.instance.azuread_administrator.object_id == null && var.instance.azuread_administrator.object_type == "ServicePrincipal" ? { "default" = {} } : {}
+
+  display_name = var.instance.azuread_administrator.login_username
+}
+
+
 # mysql server
 resource "azurerm_mssql_server" "sql" {
   resource_group_name = coalesce(
@@ -32,11 +53,15 @@ resource "azurerm_mssql_server" "sql" {
   )
 
   dynamic "identity" {
-    for_each = lookup(var.instance, "identity", null) != null ? [var.instance.identity] : []
+    for_each = try(var.instance.azuread_administrator, null) != null || try(var.instance.identity, null) != null ? [1] : []
 
     content {
-      type         = identity.value.type
-      identity_ids = identity.value.identity_ids
+      type = try(var.instance.azuread_administrator, null) != null ? (
+        try(var.instance.identity, null) == null ? "SystemAssigned" :
+        var.instance.identity.type == "UserAssigned" ? "SystemAssigned, UserAssigned" :
+        var.instance.identity.type
+      ) : var.instance.identity.type
+      identity_ids = try(var.instance.identity, null) != null ? var.instance.identity.identity_ids : []
     }
   }
 
@@ -44,8 +69,13 @@ resource "azurerm_mssql_server" "sql" {
     for_each = try(var.instance.azuread_administrator, null) != null ? { admin = var.instance.azuread_administrator } : {}
 
     content {
-      login_username              = azuread_administrator.value.login_username
-      object_id                   = azuread_administrator.value.object_id
+      login_username = azuread_administrator.value.login_username
+      object_id = coalesce(
+        azuread_administrator.value.object_id,
+        try(data.azuread_user.db_admin["default"].object_id, null),
+        try(data.azuread_group.db_admin["default"].object_id, null),
+        try(data.azuread_service_principal.db_admin["default"].object_id, null),
+      )
       tenant_id                   = azuread_administrator.value.tenant_id
       azuread_authentication_only = azuread_administrator.value.azuread_authentication_only
     }
