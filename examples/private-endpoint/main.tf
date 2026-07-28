@@ -40,9 +40,7 @@ module "network" {
 
 module "kv" {
   source  = "cloudnationhq/kv/azure"
-  version = "~> 4.0"
-
-  naming = local.naming
+  version = "~> 5.0"
 
   vault = {
     name                = module.naming.key_vault.name_unique

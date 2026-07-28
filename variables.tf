@@ -59,6 +59,17 @@ variable "instance" {
         max_capacity = optional(number)
       }), { min_capacity = 0, max_capacity = 10 }) # default should not be null
     })), {})
+    extended_auditing_policy = optional(object({
+      enabled                                 = optional(bool)
+      storage_endpoint                        = optional(string)
+      storage_account_access_key              = optional(string)
+      storage_account_access_key_is_secondary = optional(bool)
+      storage_account_subscription_id         = optional(string)
+      retention_in_days                       = optional(number)
+      log_monitoring_enabled                  = optional(bool)
+      predicate_expression                    = optional(string)
+      audit_actions_and_groups                = optional(list(string))
+    }))
     databases = optional(map(object({
       name                                                       = optional(string)
       collation                                                  = optional(string, "SQL_Latin1_General_CP1_CI_AS")
