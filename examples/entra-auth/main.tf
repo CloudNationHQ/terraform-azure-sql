@@ -42,7 +42,7 @@ module "kv" {
 module "sql" {
   source  = "cloudnationhq/sql/azure"
   version = "~> 2.0"
-  
+
   naming = local.naming
 
   instance = {
