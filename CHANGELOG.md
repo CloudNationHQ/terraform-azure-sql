@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.8.0...v3.0.0) (2026-09-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* this change causes recreates
+
+### Features
+
+* azurerm provider 5 upgrade ([#124](https://github.com/CloudNationHQ/terraform-azure-sql/issues/124)) ([6c26369](https://github.com/CloudNationHQ/terraform-azure-sql/commit/6c263699e604e3214c11053557d324373ca6dc14))
+
 ## [2.8.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.7.0...v2.8.0) (2026-07-28)
 
 
