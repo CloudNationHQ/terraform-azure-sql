@@ -1,20 +1,20 @@
-variable "instance" {
+variable "mssql_server" {
   description = "Contains all mssql server configuration"
   type = object({
     name                                         = string
     resource_group_name                          = optional(string)
     location                                     = optional(string)
     version                                      = optional(string, "12.0")
-    public_network_access_enabled                = optional(bool, true)
+    public_network_access_enabled                = optional(bool)
     primary_user_assigned_identity_id            = optional(string)
     administrator_login                          = optional(string)
     administrator_login_password                 = optional(string)
     administrator_login_password_wo              = optional(string)
     administrator_login_password_wo_version      = optional(string)
-    connection_policy                            = optional(string, "Default")
-    express_vulnerability_assessment_enabled     = optional(bool, false)
-    minimum_tls_version                          = optional(string, "1.2")
-    outbound_network_restriction_enabled         = optional(bool, false)
+    connection_policy                            = optional(string)
+    express_vulnerability_assessment_enabled     = optional(bool)
+    minimum_tls_version                          = optional(string)
+    outbound_network_restriction_enabled         = optional(bool)
     transparent_data_encryption_key_vault_key_id = optional(string)
     transparent_data_encryption = optional(object({
       key_vault_key_id      = optional(string)
@@ -33,18 +33,20 @@ variable "instance" {
       azuread_authentication_only = optional(bool)
     }))
     network_rules = optional(map(object({
+      name                                 = optional(string)
       subnet_id                            = string
-      ignore_missing_vnet_service_endpoint = optional(bool, false)
+      ignore_missing_vnet_service_endpoint = optional(bool)
     })), {})
     fw_rules = optional(map(object({
+      name             = optional(string)
       start_ip_address = string
       end_ip_address   = string
     })), {})
     elasticpools = optional(map(object({
       name                            = optional(string)
-      license_type                    = optional(string, "LicenseIncluded")
-      max_size_gb                     = optional(number, 4)
-      zone_redundant                  = optional(bool, false)
+      license_type                    = optional(string)
+      max_size_gb                     = optional(number)
+      zone_redundant                  = optional(bool)
       enclave_type                    = optional(string)
       maintenance_configuration_name  = optional(string)
       max_size_bytes                  = optional(number)
@@ -61,7 +63,7 @@ variable "instance" {
     })), {})
     extended_auditing_policy = optional(object({
       enabled                                 = optional(bool)
-      storage_endpoint                        = optional(string)
+      blob_storage_endpoint                   = optional(string)
       storage_account_access_key              = optional(string)
       storage_account_access_key_is_secondary = optional(bool)
       storage_account_subscription_id         = optional(string)
@@ -72,21 +74,21 @@ variable "instance" {
     }))
     databases = optional(map(object({
       name                                                       = optional(string)
-      collation                                                  = optional(string, "SQL_Latin1_General_CP1_CI_AS")
-      max_size_gb                                                = optional(number, 100)
-      read_scale                                                 = optional(bool, false)
-      zone_redundant                                             = optional(bool, false)
+      collation                                                  = optional(string)
+      max_size_gb                                                = optional(number)
+      read_scale                                                 = optional(bool)
+      zone_redundant                                             = optional(bool)
       sku                                                        = optional(string, "S0")
       elasticpool                                                = optional(string)
       min_capacity                                               = optional(number)
-      create_mode                                                = optional(string, "Default")
+      create_mode                                                = optional(string)
       license_type                                               = optional(string)
-      ledger_enabled                                             = optional(bool, false)
-      geo_backup_enabled                                         = optional(bool, true)
+      ledger_enabled                                             = optional(bool)
+      geo_backup_enabled                                         = optional(bool)
       sample_name                                                = optional(string)
       read_replica_count                                         = optional(number)
       storage_account_type                                       = optional(string)
-      transparent_data_encryption_enabled                        = optional(bool, true)
+      transparent_data_encryption_enabled                        = optional(bool)
       enclave_type                                               = optional(string)
       transparent_data_encryption_key_vault_key_id               = optional(string)
       transparent_data_encryption_key_automatic_rotation_enabled = optional(bool)
@@ -114,47 +116,27 @@ variable "instance" {
         storage_account_id           = optional(string)
       }))
       threat_detection_policy = optional(object({
-        state                      = optional(string, "Disabled")
-        disabled_alerts            = optional(list(string))
-        email_account_admins       = optional(string, "Disabled")
-        email_addresses            = optional(list(string))
-        retention_days             = optional(number)
-        storage_account_access_key = optional(string)
-        storage_endpoint           = optional(string)
+        state                        = optional(string)
+        disabled_alerts              = optional(list(string))
+        email_account_admins_enabled = optional(bool, false)
+        email_addresses              = optional(list(string))
+        retention_days               = optional(number)
+        storage_account_access_key   = optional(string)
+        storage_endpoint             = optional(string)
       }))
       long_term_retention_policy = optional(object({
-        weekly_retention          = optional(string)
-        monthly_retention         = optional(string)
-        yearly_retention          = optional(string)
-        week_of_year              = optional(number)
-        immutable_backups_enabled = optional(bool, false)
+        weekly_retention  = optional(string)
+        monthly_retention = optional(string)
+        yearly_retention  = optional(string)
+        week_of_year      = optional(number)
       }))
       short_term_retention_policy = optional(object({
         retention_days           = optional(number)
-        backup_interval_in_hours = optional(number, 12)
+        backup_interval_in_hours = optional(number)
       }))
     })), {})
   })
-
-  validation {
-    condition = try(var.instance.azuread_administrator, null) == null ? true : contains(
-      ["User", "Group", "ServicePrincipal"],
-      var.instance.azuread_administrator.object_type
-    )
-    error_message = "azuread_administrator.object_type must be one of: User, Group, ServicePrincipal."
-  }
-
-  validation {
-    condition     = try(var.instance.azuread_administrator, null) == null ? true : var.instance.azuread_administrator.object_id != null || var.instance.azuread_administrator.login_username != null
-    error_message = "azuread_administrator requires either object_id or login_username to identify the principal."
-  }
 }
-
-variable "naming" {
-  description = "used for naming purposes"
-  type        = map(string)
-}
-
 variable "location" {
   description = "default azure region to be used."
   type        = string

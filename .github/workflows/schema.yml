@@ -8,3 +8,5 @@ jobs:
   schema-check:
     uses: cloudnationhq/terraform-azure-workflows/.github/workflows/schema.yml@main
     secrets: inherit
+    with:
+      exclude_data_sources: azuread_user,azuread_group,azuread_service_principal
