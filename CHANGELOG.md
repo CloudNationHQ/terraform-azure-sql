@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v3.0.0...v3.1.0) (2026-10-20)
+
+
+### Features
+
+* **deps:** bump github.com/klauspost/compress in /tests ([#126](https://github.com/CloudNationHQ/terraform-azure-sql/issues/126)) ([ba740de](https://github.com/CloudNationHQ/terraform-azure-sql/commit/ba740deeae0f77f110ca7d5dba3515ba0118f2a5))
+
 ## [3.0.0](https://github.com/CloudNationHQ/terraform-azure-sql/compare/v2.8.0...v3.0.0) (2026-09-07)
 
 
